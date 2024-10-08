@@ -20,19 +20,55 @@ _or…_
 * A button was added for your convenience to run the converter.
 * Alternatively, you can run the converter by calling `window.diyOnicConverter('body')` in the console.
 
+### Dynamic on any website
+
+* Copy content of [public/diy-onic-converter.js](./public/diy-onic-converter.js)
+* Open browser console.
+* Paste the content and hit enter.
+* Run `window.diyOnicConverter('body')` in the console.
+
 ### Limitations
 
 * Some text may be treated incorrectly (&nbsp; is considered as text and partially converted)
 * Cannot be run multiple times.
 * No option to revert changes.
 
+## Tested on
+
+* https://edu.gcfglobal.org/en/basic-html/links-and-images-in-html/1/
+* Using `diyOnicConverter(".lesson-block.lesson")` command in console.
+
 ### Open questions
-* What to do with &nbsp;? Should we consider it as space or text?
+* What to do with `&nbsp;`? Should we consider it as space or text?
   * If its considered as space, then what comes next will be Bionic.
-* What to do with existing B tags? Should we remove them?
+  * If its considered as a text, then it may be partially bolded.
+  * The given example has both use-cases and each is treated differently (unless its considered as a single character all together).
+* What to do with existing `b` tags? Should we remove them?
   * In the example, it seems like they are removed.
 * I am assuming we want to keep the original HTML structure including the tags.
   * For example, if a text is wrapped in an 'a' tag, we should keep it that way.
   * Should we apply Bionic on the attributes inside the 'a' tag? For example the `aria-labelledby`, `name`, `title` etc.
 * Should we be able to run the converter multiple times on the same page/text?
 
+## Checklist
+
+### Bionic (Basic Requirements)
+- [ ] Provide Github link to the forked repo
+- [x] The function works as specified
+  - [x] Invoke function with selector on provided static website
+  - [x] Transform all text within p tags
+- [x] Only needs to support a static prefix length (ie. the number of letters that are bolded)
+- [x] The converted HTML and styles sufficiently resemble the conversion performed by https://bionic-reading.com
+- [x] README.md provides accurate instructions on how to execute the function
+
+### Bionic Plus (Above and Beyond)
+- [x] Please make sure the basic requirements above are working before attempting these bonus features
+- [x] The function works when dynamically added to real-world websites (copy-paste into console, invoke function with selector, see results on the current website)
+  - [x] README.md states that this is possible and provides accurate instructions for doing so in addition to a list of sites it was tested on
+- [ ] The function includes one or more additional capabilities that goes beyond the basic bionic reading conversion. Including, but not limited to:
+  - [x] Handles inline HTML tags (<span>, <a>, <em>, etc) while maintaining block level tags
+  - [x] Preserves links and images
+  - [ ] Apply to entire page instead of only p tags
+  - [x] Allows options to be passed to the function to customize the way formatting is performed
+- [ ] README.md describes the limitations of this implementation (provide sample websites that demonstrate these limitations, if possible)
+- [ ] Big flex: an in-page user interface that allows the user to convert/toggle the page interactively
