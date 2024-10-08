@@ -1,11 +1,10 @@
-const STATIC_CONVERTION_LENGTH = 3;
 const DO_NOT_CONVERT_LIST = ["\n", ""];
 const BOLD_STYLE = "font-weight: bold;";
 
 /**
  * Implement your converter function here.
  */
-const diyOnicConverter = (textContentContainerSelector) => {
+const diyOnicConverter = (textContentContainerSelector, bionicReadingLength = 3) => {
   const container = document.querySelector(textContentContainerSelector);
   console.log(`Performing bionic reading conversion on selector: ${textContentContainerSelector}`);
 
@@ -15,12 +14,12 @@ const diyOnicConverter = (textContentContainerSelector) => {
 
     // Replace only text without touching HTML tags.
     const textContentRegex = /([^<>]+)(?=<|$)/g;
-    const convertedText = text.replace(textContentRegex, convertToBionicReading);
+    const convertedText = text.replace(textContentRegex, (match) => convertToBionicReading(match, bionicReadingLength));
     p.innerHTML = convertedText;
   });
 };
 
-const convertToBionicReading = (text) => {
+const convertToBionicReading = (text, bionicReadingLength) => {
   // Extract tags
   const words = text.split(" ");
   const bionicText = words.map((word) => {
@@ -29,7 +28,7 @@ const convertToBionicReading = (text) => {
     }
     // Wrap first 3 characters of each word in bionic span.
     // Even if the characters include whitespaces (ex. \n) we still wrap them in bionic span since they are not displayed.
-    return `<span style="${BOLD_STYLE}">${word.slice(0, STATIC_CONVERTION_LENGTH)}</span>${word.slice(STATIC_CONVERTION_LENGTH)}`;
+    return `<span style="${BOLD_STYLE}">${word.slice(0, bionicReadingLength)}</span>${word.slice(bionicReadingLength)}`;
   }).join(" ");
   return bionicText;
 };
