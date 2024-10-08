@@ -36,7 +36,7 @@ const diyOnicConverter = (() => {
   const CONVERT_BUTTON_STYLE = `${BUTTON_STYLE} right: 10px; background-color: #4CAF50;`;
   const REVERT_BUTTON_STYLE = `${BUTTON_STYLE} right: 200px; background-color: #f44336;`;
 
-  const createButtons = () => {
+  const createBionicConverterButtons = () => {
     const convertButton = document.createElement('button');
     convertButton.textContent = 'Convert to Bionic Reading';
     convertButton.style.cssText = CONVERT_BUTTON_STYLE;
@@ -50,15 +50,18 @@ const diyOnicConverter = (() => {
     document.body.appendChild(revertButton);
   };
 
-  // Call this function to create the button when the script is loaded
+  // Add buttons to the page when the DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
-    createButtons();
+    createBionicConverterButtons();
   });
+  window.createBionicConverterButtons = createBionicConverterButtons;
 
   /**
    * Converts selected tag to bionic reading format.
    */
   return (textContentContainerSelector, bionicReadingLength = 3) => {
+    // To prevent bionic not running properly a second time, revert the changes first.
+    revertBionicReading();
     const container = document.querySelector(textContentContainerSelector);
     console.log(`Performing bionic reading conversion on selector: ${textContentContainerSelector}`);
 

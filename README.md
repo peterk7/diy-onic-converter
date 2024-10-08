@@ -21,7 +21,7 @@ The convertion is done by:
 1. Extract all P tags from the container.
 2. Extract text content from each P tag using a regex.
 3. Run converter function on each text content.
-  * It wraps first 3 characters of each word in bionic span.
+  * It wraps first `n` characters of each word in bionic span.
 4. Replace the original paragraph content with the converted text.
 
 ## Instructiuons
@@ -37,6 +37,7 @@ Additional parameters can be passed to the function to customize the way formatt
 * Copy content of [public/diy-onic-converter.js](./public/diy-onic-converter.js)
 * Open browser console.
 * Paste the content and hit enter.
+* Run `window.createBionicConverterButtons()` in the console.
 * Two buttons will be added to the page, in the top right corner.
 * Click on "Convert to Bionic Reading" button to convert the text.
 * Alternatively, run `window.diyOnicConverter('body')` in the console.
@@ -44,9 +45,6 @@ Additional parameters can be passed to the function to customize the way formatt
 ### Limitations
 
 * Some text may be treated incorrectly (&nbsp; is considered as text and partially converted)
-* Cannot be run multiple times.
-* Some websites would prevent adding dynamic HTML elements, in that case try running the code in the console.
-  * Run `window.diyOnicConverter('body')` to verify it works.
 * Some websites may prevent running the code alltogether. In that case, try running it on a different website.
 
 ## Tested on
@@ -83,7 +81,7 @@ Additional parameters can be passed to the function to customize the way formatt
 - [x] Please make sure the basic requirements above are working before attempting these bonus features
 - [x] The function works when dynamically added to real-world websites (copy-paste into console, invoke function with selector, see results on the current website)
   - [x] README.md states that this is possible and provides accurate instructions for doing so in addition to a list of sites it was tested on
-- [ ] The function includes one or more additional capabilities that goes beyond the basic bionic reading conversion. Including, but not limited to:
+- [x] The function includes one or more additional capabilities that goes beyond the basic bionic reading conversion. Including, but not limited to:
   - [x] Handles inline HTML tags (<span>, <a>, <em>, etc) while maintaining block level tags
   - [x] Preserves links and images
   - [ ] Apply to entire page instead of only p tags
