@@ -11,32 +11,50 @@ _or…_
 
 ### Approach taken
 
+1. When code is loaded, it creates two buttons on the page.
+2. Clicking on "Convert to Bionic Reading" button will convert the text to bionic reading.
+3. Clicking on "Revert Bionic Reading" button will revert the text to the original state.
+
+Underlying code is in [public/diy-onic-converter.js](./public/diy-onic-converter.js).
+The convertion is done by:
+
 1. Extract all P tags from the container.
 2. Extract text content from each P tag using a regex.
 3. Run converter function on each text content.
-5. Replace the original paragraph content with the converted text.
+  * It wraps first 3 characters of each word in bionic span.
+4. Replace the original paragraph content with the converted text.
 
 ## Instructiuons
 * A button was added for your convenience to run the converter.
 * Alternatively, you can run the converter by calling `window.diyOnicConverter('body')` in the console.
+  * Any selector can be given as an argument.
+
+Additional parameters can be passed to the function to customize the way formatting is performed.
+* `prefixLength` - Number of characters to wrap in bionic span.
 
 ### Dynamic on any website
 
 * Copy content of [public/diy-onic-converter.js](./public/diy-onic-converter.js)
 * Open browser console.
 * Paste the content and hit enter.
-* Run `window.diyOnicConverter('body')` in the console.
+* Two buttons will be added to the page, in the top right corner.
+* Click on "Convert to Bionic Reading" button to convert the text.
+* Alternatively, run `window.diyOnicConverter('body')` in the console.
 
 ### Limitations
 
 * Some text may be treated incorrectly (&nbsp; is considered as text and partially converted)
 * Cannot be run multiple times.
-* No option to revert changes.
+* Some websites would prevent adding dynamic HTML elements, in that case try running the code in the console.
+  * Run `window.diyOnicConverter('body')` to verify it works.
+* Some websites may prevent running the code alltogether. In that case, try running it on a different website.
 
 ## Tested on
 
 * https://edu.gcfglobal.org/en/basic-html/links-and-images-in-html/1/
-* Using `diyOnicConverter(".lesson-block.lesson")` command in console.
+  * Using `diyOnicConverter(".lesson-block.lesson")` command in console.
+* https://en.wikipedia.org/wiki/JavaScript
+  * Using `diyOnicConverter("body")` command in console.
 
 ### Open questions
 * What to do with `&nbsp;`? Should we consider it as space or text?
@@ -71,5 +89,5 @@ _or…_
   - [ ] Apply to entire page instead of only p tags
   - [x] Allows options to be passed to the function to customize the way formatting is performed
 - [ ] README.md describes the limitations of this implementation (provide sample websites that demonstrate these limitations, if possible)
-- [ ] Big flex: an in-page user interface that allows the user to convert/toggle the page interactively
+- [x] Big flex: an in-page user interface that allows the user to convert/toggle the page interactively
   - [x] User interface only for this repository.

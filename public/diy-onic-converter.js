@@ -19,6 +19,42 @@ const diyOnicConverter = (() => {
     return bionicText;
   };
 
+  const revertBionicReading = () => {
+    const container = document.querySelector('body');
+    const bionicSpans = container.querySelectorAll('.bionic-text');
+
+    bionicSpans.forEach(span => {
+      const textContent = span.textContent;
+      span.outerHTML = textContent;
+    });
+  };
+
+  /**
+     * Creates a button to trigger the bionic reading conversion.
+     */
+  const BUTTON_STYLE = 'position: fixed; top: 10px; z-index: 9999; padding: 10px; color: white; border: none; cursor: pointer;';
+  const CONVERT_BUTTON_STYLE = `${BUTTON_STYLE} right: 10px; background-color: #4CAF50;`;
+  const REVERT_BUTTON_STYLE = `${BUTTON_STYLE} right: 200px; background-color: #f44336;`;
+
+  const createButtons = () => {
+    const convertButton = document.createElement('button');
+    convertButton.textContent = 'Convert to Bionic Reading';
+    convertButton.style.cssText = CONVERT_BUTTON_STYLE;
+    convertButton.onclick = () => diyOnicConverter('body');
+    document.body.appendChild(convertButton);
+
+    const revertButton = document.createElement('button');
+    revertButton.textContent = 'Revert Bionic Reading';
+    revertButton.style.cssText = REVERT_BUTTON_STYLE;
+    revertButton.onclick = revertBionicReading;
+    document.body.appendChild(revertButton);
+  };
+
+  // Call this function to create the button when the script is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    createButtons();
+  });
+
   /**
    * Converts selected tag to bionic reading format.
    */
