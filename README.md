@@ -12,9 +12,8 @@ _or…_
 ### Approach taken
 
 1. Extract all P tags from the container.
-2. Extract text content from each P tag.
-3. Replace only text by using a regex to split text from HTML tags.
-4. Perform bionic reading conversion on the text sections.
+2. Extract text content from each P tag using a regex.
+3. Run converter function on each text content.
 5. Replace the original paragraph content with the converted text.
 
 ## Instructiuons
@@ -23,9 +22,9 @@ _or…_
 
 ### Limitations
 
-* Loosing the HTML tags and structure in the process
-* Not easily reusable - needs css class and extra functions.
-* Some text may be treated incorrectly (&nbsp; is considered as space)
+* Some text may be treated incorrectly (&nbsp; is considered as text and partially converted)
+* Cannot be run multiple times.
+* No option to revert changes.
 
 ### Open questions
 * What to do with &nbsp;? Should we consider it as space or text?
@@ -34,4 +33,6 @@ _or…_
   * In the example, it seems like they are removed.
 * I am assuming we want to keep the original HTML structure including the tags.
   * For example, if a text is wrapped in an 'a' tag, we should keep it that way.
+  * Should we apply Bionic on the attributes inside the 'a' tag? For example the `aria-labelledby`, `name`, `title` etc.
+* Should we be able to run the converter multiple times on the same page/text?
 
