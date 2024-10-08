@@ -20,6 +20,7 @@ The convertion is done by:
 
 1. Extract all P tags from the container.
 2. Extract text content from each P tag using a regex.
+  * We are looking at the raw HTML to ensure we are not overriding the HTML elements within the P tags.
 3. Run converter function on each text content.
   * It wraps first `n` characters of each word in bionic span.
 4. Replace the original paragraph content with the converted text.
@@ -46,6 +47,8 @@ Additional parameters can be passed to the function to customize the way formatt
 
 * Some text may be treated incorrectly (&nbsp; is considered as text and partially converted)
 * Some websites may prevent running the code alltogether. In that case, try running it on a different website.
+* Due to how we are using the replacing of the HTML, some special characters are not converted properly (for example &nbsp;).
+  * This is because we are attempting to keep the HTML structure while replacing the text.
 
 ## Tested on
 

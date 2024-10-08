@@ -68,8 +68,8 @@ const diyOnicConverter = (() => {
     const pTags = container.querySelectorAll("p");
     pTags.forEach((p) => {
       const text = p.innerHTML;
-
       // Replace only text without touching HTML tags.
+      // TODO: Add handling for special characters like &nbsp;
       const textContentRegex = /([^<>]+)(?=<|$)/g;
       const convertedText = text.replace(textContentRegex, (match) => convertToBionicReading(match, bionicReadingLength));
       p.innerHTML = convertedText;
