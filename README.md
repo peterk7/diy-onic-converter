@@ -17,10 +17,21 @@ _or…_
 4. Perform bionic reading conversion on the text sections.
 5. Replace the original paragraph content with the converted text.
 
+## Instructiuons
+* A button was added for your convenience to run the converter.
+* Alternatively, you can run the converter by calling `window.diyOnicConverter('body')` in the console.
+
 ### Limitations
 
 * Loosing the HTML tags and structure in the process
 * Not easily reusable - needs css class and extra functions.
 * Some text may be treated incorrectly (&nbsp; is considered as space)
 
+### Open questions
+* What to do with &nbsp;? Should we consider it as space or text?
+  * If its considered as space, then what comes next will be Bionic.
+* What to do with existing B tags? Should we remove them?
+  * In the example, it seems like they are removed.
+* I am assuming we want to keep the original HTML structure including the tags.
+  * For example, if a text is wrapped in an 'a' tag, we should keep it that way.
 
