@@ -9,4 +9,18 @@ _or…_
 
 ## Information
 
-TODO:
+### Approach taken
+
+1. Extract all P tags from the container.
+2. Extract text content from each P tag.
+3. Replace only text by using a regex to split text from HTML tags.
+4. Perform bionic reading conversion on the text sections.
+5. Replace the original paragraph content with the converted text.
+
+### Limitations
+
+* Loosing the HTML tags and structure in the process
+* Not easily reusable - needs css class and extra functions.
+* Some text may be treated incorrectly (&nbsp; is considered as space)
+
+

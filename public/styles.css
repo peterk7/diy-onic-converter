@@ -1,0 +1,9 @@
+.bionic-word {
+  font-weight: bold;
+}
+
+.global-action-container {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+}
