@@ -12,9 +12,31 @@ const diyOnicConverter = (() => {
       if (DO_NOT_CONVERT_LIST.includes(word)) {
         return word;
       }
-      // Wrap first 3 characters of each word in bionic span.
-      // Even if the characters include whitespaces (ex. \n) we still wrap them in bionic span since they are not displayed.
-      return `<span style="${BOLD_STYLE}" class="bionic-text">${word.slice(0, bionicReadingLength)}</span>${word.slice(bionicReadingLength)}`;
+      // Wrap first 3 characters of each word in bionic span, handling special characters.
+      const specialCharRegex = /&[a-zA-Z0-9#]{1,4};/;
+      const match = word.match(specialCharRegex);
+      if (match) {
+        const specialChar = match[0];
+        const specialCharIndex = word.indexOf(specialChar);
+        const beforeSpecialChar = word.slice(0, specialCharIndex);
+        const afterSpecialChar = word.slice(specialCharIndex + specialChar.length);
+
+        let bionicPart = '';
+        let restPart = '';
+
+        if (specialCharIndex < bionicReadingLength) {
+          const remainingLength = bionicReadingLength - specialCharIndex - 1;
+          bionicPart = beforeSpecialChar + specialChar + afterSpecialChar.slice(0, remainingLength);
+          restPart = afterSpecialChar.slice(remainingLength);
+        } else {
+          bionicPart = beforeSpecialChar.slice(0, bionicReadingLength);
+          restPart = beforeSpecialChar.slice(bionicReadingLength) + specialChar + afterSpecialChar;
+        }
+
+        return `<span style="${BOLD_STYLE}" class="bionic-text">${bionicPart}</span>${restPart}`;
+      } else {
+        return `<span style="${BOLD_STYLE}" class="bionic-text">${word.slice(0, bionicReadingLength)}</span>${word.slice(bionicReadingLength)}`;
+      }
     }).join(" ");
     return bionicText;
   };
